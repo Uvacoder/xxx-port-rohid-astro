@@ -1,6 +1,6 @@
 ---
 import format from "date-fns/format";
-import type { Post } from "@/types/post";
+import type { Post } from "@/types";
 
 export interface Props {
   post: Post;
@@ -15,6 +15,7 @@ const {
   <a
     href={url}
     class="aspect-video w-full relative block mb-4 group overflow-hidden rounded-xl"
+    aria-label={title}
   >
     <img
       src={coverImage}
@@ -26,9 +27,9 @@ const {
     >
     </div>
   </a>
-  <h1 class="text-xl font-bold mb-2">
+  <h3 class="text-xl font-bold mb-2">
     <a href={url}>{title}</a>
-  </h1>
+  </h3>
   <p class="line-clamp-2 text-gray-600 mb-2">
     {description}
   </p>

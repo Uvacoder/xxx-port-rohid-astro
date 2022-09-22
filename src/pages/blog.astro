@@ -1,0 +1,37 @@
+---
+import compareDesc from "date-fns/compareDesc";
+import { SITE_DESCRIPTION } from "@/config";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import type { Post } from "@/types/post";
+import PostsGrid from "@/components/PostsGrid.astro";
+
+// Use Astro.glob() to fetch all posts, and then sort them by date.
+const posts = (await Astro.glob("./blog/*.{md,mdx}"))
+  .sort((a, b) =>
+    compareDesc(new Date(a.frontmatter.date), new Date(b.frontmatter.date))
+  )
+  .map((data) => {
+    const post: Post = {
+      url: data.url,
+      date: data.frontmatter.date,
+      readingTime: data.frontmatter.readingtime,
+      title: data.frontmatter.title,
+      description: data.frontmatter.description,
+      thumbnail: data.frontmatter.thumbnail,
+    };
+    return post;
+  });
+---
+
+<BaseLayout title="Blogs - Rohid" description={SITE_DESCRIPTION}>
+  <main>
+    <div class="max-w-4xl mx-auto px-6 space-y-32 my-16">
+      <section>
+        <div class="mb-8">
+          <h3 class="text-2xl font-bold">All Posts</h3>
+        </div>
+        <PostsGrid posts={posts} />
+      </section>
+    </div>
+  </main>
+</BaseLayout>

@@ -1,0 +1,45 @@
+---
+import { format } from "date-fns";
+import BaseLayout from "./BaseLayout.astro";
+
+export interface Props {
+  content: {
+    title: string;
+    description: string;
+    date?: string;
+    readingTime?: string;
+    thumbnail?: string;
+  };
+}
+
+const {
+  content: { title, description, date, readingTime, thumbnail },
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description} image={thumbnail}>
+  <main>
+    <div class="my-16 space-y-16 mx-auto max-w-4xl px-6">
+      <header>
+        <p class="mb-2 text-gray-600">
+          {date && <time>{format(new Date(date), "MMM dd, yyyy")}</time>}
+          {" • "}
+          <span>{readingTime}</span>
+        </p>
+        <h1 class="text-4xl font-black">
+          {title}
+        </h1>
+        <div class="aspect-video rounded-xl overflow-hidden mt-8 relative">
+          <img
+            src={thumbnail}
+            alt={`${title} - Thumnail`}
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+      </header>
+      <article class="prose dark:prose-invert mx-auto">
+        <slot />
+      </article>
+    </div>
+  </main>
+</BaseLayout>

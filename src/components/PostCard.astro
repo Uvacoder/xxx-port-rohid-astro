@@ -1,0 +1,42 @@
+---
+import format from "date-fns/format";
+import type { Post } from "@/types/post";
+
+export interface Props {
+  post: Post;
+}
+
+const {
+  post: { url, title, readingTime, date, description, thumbnail },
+} = Astro.props;
+---
+
+<article>
+  <a
+    href={url}
+    class="aspect-video w-full relative block mb-4 group overflow-hidden rounded-xl"
+  >
+    <img
+      src={thumbnail}
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+    />
+    <div
+      class="absolute inset-0 group-hover:bg-black/50 transition-colors duration-300"
+    >
+    </div>
+  </a>
+  <h1 class="text-xl font-bold mb-2">
+    <a href={url}>{title}</a>
+  </h1>
+  <p class="line-clamp-2 text-gray-600 mb-2">
+    {description}
+  </p>
+  <p class="text-gray-600">
+    <time datetime={date}>
+      {format(new Date(date), "MMM dd, yyyy")}
+    </time>
+    {" • "}
+    <span>{readingTime}</span>
+  </p>
+</article>

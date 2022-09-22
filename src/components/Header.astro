@@ -1,0 +1,21 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+---
+
+<header>
+  <div class="flex gap-8 py-4 px-6 mx-auto max-w-6xl">
+    <nav class="flex flex-1 items-center gap-4">
+      <HeaderLink href="/">Home</HeaderLink>
+      <HeaderLink href="/blog">Blog</HeaderLink>
+    </nav>
+
+    <nav class="flex flex-1 items-center justify-end gap-4">
+      <HeaderLink href="https://twitter.com/rohid2d" target="_blank">
+        Twitter
+      </HeaderLink>
+      <HeaderLink href="https://github.com/rohid2d" target="_blank">
+        GitHub
+      </HeaderLink>
+    </nav>
+  </div>
+</header>

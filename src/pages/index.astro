@@ -7,6 +7,7 @@ import PostsGrid from "@/components/PostsGrid.astro";
 
 const name = "Rohid";
 const posts = (await Astro.glob("./blog/*.{md,mdx}"))
+  .filter((post) => post.frontmatter.draft !== true)
   .sort((a, b) =>
     compareDesc(new Date(a.frontmatter.date), new Date(b.frontmatter.date))
   )
@@ -15,7 +16,7 @@ const posts = (await Astro.glob("./blog/*.{md,mdx}"))
     const post: Post = {
       url: data.url,
       date: data.frontmatter.date,
-      readingTime: data.frontmatter.readingtime,
+      readingTime: data.frontmatter.readingTime,
       title: data.frontmatter.title,
       description: data.frontmatter.description,
       thumbnail: data.frontmatter.thumbnail,
@@ -28,7 +29,7 @@ const posts = (await Astro.glob("./blog/*.{md,mdx}"))
   <main>
     <div class="mx-auto max-w-4xl px-6 my-16 space-y-32">
       <section>
-        <div class="">
+        <div class="text-center">
           <p class="text-2xl font-semibold text-gray-700">Hi 👋, I&apos;m</p>
           <h1 class="text-6xl font-black my-4">{name}</h1>
           <p class="text-xl text-gray-600">

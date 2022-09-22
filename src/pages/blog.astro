@@ -7,6 +7,7 @@ import PostsGrid from "@/components/PostsGrid.astro";
 
 // Use Astro.glob() to fetch all posts, and then sort them by date.
 const posts = (await Astro.glob("./blog/*.{md,mdx}"))
+  .filter((post) => post.frontmatter.draft !== true)
   .sort((a, b) =>
     compareDesc(new Date(a.frontmatter.date), new Date(b.frontmatter.date))
   )
@@ -14,7 +15,7 @@ const posts = (await Astro.glob("./blog/*.{md,mdx}"))
     const post: Post = {
       url: data.url,
       date: data.frontmatter.date,
-      readingTime: data.frontmatter.readingtime,
+      readingTime: data.frontmatter.readingTime,
       title: data.frontmatter.title,
       description: data.frontmatter.description,
       thumbnail: data.frontmatter.thumbnail,

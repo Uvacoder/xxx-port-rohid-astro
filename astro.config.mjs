@@ -14,7 +14,7 @@ function remarkReadingTime() {
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com",
+  site: "https://rohid.dev",
   integrations: [mdx(), sitemap()],
   markdown: {
     remarkPlugins: [remarkReadingTime],

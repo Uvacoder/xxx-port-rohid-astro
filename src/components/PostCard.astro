@@ -7,7 +7,7 @@ export interface Props {
 }
 
 const {
-  post: { url, title, readingTime, date, description, thumbnail },
+  post: { url, title, readingTime, date, description, coverImage },
 } = Astro.props;
 ---
 
@@ -17,7 +17,7 @@ const {
     class="aspect-video w-full relative block mb-4 group overflow-hidden rounded-xl"
   >
     <img
-      src={thumbnail}
+      src={coverImage}
       alt=""
       class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
     />

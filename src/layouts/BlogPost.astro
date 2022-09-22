@@ -8,16 +8,16 @@ export interface Props {
     description: string;
     date?: string;
     readingTime?: string;
-    thumbnail?: string;
+    coverImage?: string;
   };
 }
 
 const {
-  content: { title, description, date, readingTime, thumbnail },
+  content: { title, description, date, readingTime, coverImage },
 } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} image={thumbnail}>
+<BaseLayout title={title} description={description} image={coverImage}>
   <main>
     <div class="my-16 space-y-16 mx-auto max-w-4xl px-6">
       <header>
@@ -31,7 +31,7 @@ const {
         </h1>
         <div class="aspect-video rounded-xl overflow-hidden mt-8 relative">
           <img
-            src={thumbnail}
+            src={coverImage}
             alt={`${title} - Thumnail`}
             class="absolute inset-0 w-full h-full object-cover"
           />

@@ -2,23 +2,22 @@
 import compareDesc from "date-fns/compareDesc";
 import { SITE_DESCRIPTION } from "@/config";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import type { Post } from "@/types/post";
+import type { Post, BlogFrontmatter } from "@/types";
 import PostsGrid from "@/components/PostsGrid.astro";
 
-// Use Astro.glob() to fetch all posts, and then sort them by date.
-const posts = (await Astro.glob("./blog/*.{md,mdx}"))
+const posts = (await Astro.glob<BlogFrontmatter>("./posts/*.mdx"))
   .filter((post) => post.frontmatter.draft !== true)
   .sort((a, b) =>
     compareDesc(new Date(a.frontmatter.date), new Date(b.frontmatter.date))
   )
-  .map((data) => {
+  .map(({ url, frontmatter }) => {
     const post: Post = {
-      url: data.url,
-      date: data.frontmatter.date,
-      readingTime: data.frontmatter.readingTime,
-      title: data.frontmatter.title,
-      description: data.frontmatter.description,
-      thumbnail: data.frontmatter.thumbnail,
+      url: url || "/404",
+      date: frontmatter.date,
+      readingTime: frontmatter.readingTime,
+      title: frontmatter.title,
+      description: frontmatter.description,
+      coverImage: frontmatter.coverImage,
     };
     return post;
   });

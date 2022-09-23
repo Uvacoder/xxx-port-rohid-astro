@@ -3,3 +3,10 @@
 
 export const SITE_TITLE = "Rohid";
 export const SITE_DESCRIPTION = "I'm a self-thought full-stack developer";
+
+export const SOCIAL_LINKS = [
+  "https://twitter.com/rohid2d",
+  "https://www.linkedin.com/in/rohidul209/",
+  "https://github.com/rohid2d",
+  "https://instagram.com/rohid2d",
+];

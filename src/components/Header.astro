@@ -1,9 +1,10 @@
 ---
+import { SOCIAL_LINKS } from "@/config";
 import HeaderLink from "./HeaderLink.astro";
 ---
 
 <header>
-  <div class="flex gap-8 py-4 px-6 mx-auto max-w-6xl">
+  <div class="flex gap-8 py-2 px-6 mx-auto max-w-6xl">
     <nav class="flex flex-1 items-center gap-4">
       <HeaderLink href="/">Home</HeaderLink>
       <HeaderLink href="/posts">Posts</HeaderLink>
@@ -11,12 +12,33 @@ import HeaderLink from "./HeaderLink.astro";
     </nav>
 
     <nav class="flex flex-1 items-center justify-end gap-4">
-      <HeaderLink href="https://twitter.com/rohid2d" target="_blank">
-        Twitter
-      </HeaderLink>
-      <HeaderLink href="https://github.com/rohid2d" target="_blank">
-        GitHub
-      </HeaderLink>
+      <ul class="flex flex-wrap items-center justify-center gap-6">
+        {
+          SOCIAL_LINKS.map((link) => (
+            <li>
+              <a
+                href={link}
+                class="text-xl hover:text-gray-600"
+                target="_blank"
+              >
+                {link.match(/^https:\/\/(www.)?github.com\/.*/) ? (
+                  <i class="fa-brands fa-github" />
+                ) : link.match(/^https:\/\/(www.)?instagram.com\/.*/) ? (
+                  <i class="fa-brands fa-instagram" />
+                ) : link.match(/^https:\/\/(www.)?facebook.com\/.*/) ? (
+                  <i class="fa-brands fa-facebook" />
+                ) : link.match(/^https:\/\/(www.)?linkedin.com\/.*/) ? (
+                  <i class="fa-brands fa-linkedin" />
+                ) : link.match(/^https:\/\/(www.)?twitter.com\/.*/) ? (
+                  <i class="fa-brands fa-twitter" />
+                ) : (
+                  <i class="fa-solid fa-link" />
+                )}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </nav>
   </div>
 </header>

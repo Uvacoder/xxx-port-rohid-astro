@@ -2,28 +2,43 @@
 import { compareDesc } from "date-fns";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "@/config";
-import type { Post, BlogFrontmatter } from "@/types";
-import PostsGrid from "@/components/PostsGrid.astro";
+import type { PostFrontmatter, ProjectFrontmatter } from "@/types";
+import PostCard from "@/components/PostCard.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
 
 const name = "Rohid";
 
-const posts = (await Astro.glob<BlogFrontmatter>("./posts/*.mdx"))
+const posts = (await Astro.glob<PostFrontmatter>("./posts/*.mdx"))
   .filter((post) => post.frontmatter.draft !== true)
   .sort((a, b) =>
-    compareDesc(new Date(a.frontmatter.date), new Date(b.frontmatter.date))
+    compareDesc(
+      new Date(a.frontmatter.pubDate),
+      new Date(b.frontmatter.pubDate)
+    )
   )
-  .slice(0, 6)
-  .map(({ url, frontmatter }) => {
-    const post: Post = {
-      url: url || "/404",
-      date: frontmatter.date,
-      readingTime: frontmatter.readingTime,
-      title: frontmatter.title,
-      description: frontmatter.description,
-      coverImage: frontmatter.coverImage,
-    };
-    return post;
-  });
+  .slice(0, 6);
+
+const featuredPosts = (await Astro.glob<PostFrontmatter>("./posts/*.mdx"))
+  .filter((item) => !item.frontmatter.draft && item.frontmatter.featured)
+  .sort((a, b) =>
+    compareDesc(
+      new Date(a.frontmatter.pubDate),
+      new Date(b.frontmatter.pubDate)
+    )
+  )
+  .slice(0, 4);
+
+const featuredProjects = (
+  await Astro.glob<ProjectFrontmatter>("./projects/*.mdx")
+)
+  .filter((item) => !item.frontmatter.draft && item.frontmatter.featured)
+  .sort((a, b) =>
+    compareDesc(
+      new Date(a.frontmatter.pubDate),
+      new Date(b.frontmatter.pubDate)
+    )
+  )
+  .slice(0, 4);
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -31,6 +46,7 @@ const posts = (await Astro.glob<BlogFrontmatter>("./posts/*.mdx"))
     <div class="mx-auto max-w-4xl px-6 my-16 space-y-32">
       <section>
         <div class="text-center">
+          <p class="text-8xl mb-16">👨‍💻</p>
           <p class="text-2xl font-semibold text-gray-700">Hi 👋, I&apos;m</p>
           <h1 class="text-6xl font-black my-4">{name}</h1>
           <p class="text-xl text-gray-600">
@@ -41,9 +57,44 @@ const posts = (await Astro.glob<BlogFrontmatter>("./posts/*.mdx"))
 
       <section>
         <div class="mb-8">
+          <h2 class="text-2xl font-bold">Featured Posts</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          {
+            featuredPosts.map((post) => (
+              <PostCard url={post.url} data={post.frontmatter} />
+            ))
+          }
+        </div>
+      </section>
+
+      <section>
+        <div class="mb-8">
           <h2 class="text-2xl font-bold">Recent Posts</h2>
         </div>
-        <PostsGrid posts={posts} />
+
+        <div class="grid md:grid-cols-2 gap-8">
+          {
+            posts.map((post) => (
+              <PostCard url={post.url} data={post.frontmatter} />
+            ))
+          }
+        </div>
+      </section>
+
+      <section>
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold">Featured Projects</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          {
+            featuredProjects.map((post) => (
+              <ProjectCard url={post.url} data={post.frontmatter} />
+            ))
+          }
+        </div>
       </section>
     </div>
   </main>

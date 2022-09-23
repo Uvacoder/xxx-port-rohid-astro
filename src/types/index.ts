@@ -6,13 +6,35 @@ export interface Post {
   date: string;
   description?: string;
 }
+export interface Project {
+  url: string;
+  title: string;
+  coverImage: string;
+  pubDate: string;
+  lauchDate?: string;
+  description?: string;
+  repoURL?: string;
+  visitURL?: string;
+}
 
-export interface BlogFrontmatter {
+export interface PostFrontmatter {
   title: string;
   description: string;
   coverImage: string;
-  date: string;
+  pubDate: string;
   readingTime: string;
   draft?: boolean;
-  tags?: string[];
+  featured?: boolean;
+}
+
+export interface ProjectFrontmatter {
+  title: string;
+  coverImage: string;
+  description?: string;
+  pubDate: string;
+  launchDate?: string;
+  repoURL?: string;
+  visitURL?: string;
+  featured?: boolean;
+  draft?: boolean;
 }

@@ -1,13 +1,15 @@
 ---
 import { format } from "date-fns";
-import type { Post } from "@/types";
+import type { PostFrontmatter } from "@/types";
 
 export interface Props {
-  post: Post;
+  url?: string;
+  data: PostFrontmatter;
 }
 
 const {
-  post: { url, title, readingTime, date, description, coverImage },
+  url,
+  data: { title, readingTime, pubDate, description, coverImage },
 } = Astro.props;
 ---
 
@@ -34,8 +36,8 @@ const {
     {description}
   </p>
   <p class="text-gray-600">
-    <time datetime={date}>
-      {format(new Date(date), "MMM dd, yyyy")}
+    <time datetime={pubDate}>
+      {format(new Date(pubDate), "MMM dd, yyyy")}
     </time>
     {" • "}
     <span>{readingTime}</span>

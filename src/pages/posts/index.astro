@@ -1,0 +1,51 @@
+---
+import { compareDesc } from "date-fns";
+import { SITE_DESCRIPTION } from "@/config";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import type { PostFrontmatter } from "@/types";
+import PostCard from "@/components/PostCard.astro";
+
+const posts = (await Astro.glob<PostFrontmatter>("./*.mdx"))
+  .filter((post) => post.frontmatter.draft !== true)
+  .sort((a, b) =>
+    compareDesc(
+      new Date(a.frontmatter.pubDate),
+      new Date(b.frontmatter.pubDate)
+    )
+  );
+
+const featuredPosts = posts.filter((post) => post.frontmatter.featured);
+---
+
+<BaseLayout title="Blogs - Rohid" description={SITE_DESCRIPTION}>
+  <main>
+    <div class="max-w-4xl mx-auto px-6 space-y-32 my-16">
+      {
+        featuredPosts.length > 0 && (
+          <section>
+            <div class="mb-8">
+              <h2 class="text-2xl font-bold">Featured Posts</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+              {featuredPosts.map((post) => (
+                <PostCard url={post.url} data={post.frontmatter} />
+              ))}
+            </div>
+          </section>
+        )
+      }
+      <section>
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold">All Posts</h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+          {
+            posts.map((post) => (
+              <PostCard url={post.url} data={post.frontmatter} />
+            ))
+          }
+        </div>
+      </section>
+    </div>
+  </main>
+</BaseLayout>

@@ -1,0 +1,66 @@
+---
+import type { ProjectFrontmatter } from "@/types";
+import { format } from "date-fns";
+import BaseLayout from "./BaseLayout.astro";
+
+export interface Props {
+  content: ProjectFrontmatter;
+}
+
+const {
+  content: { title, description, visitURL, repoURL, launchDate, coverImage },
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description} image={coverImage}>
+  <main>
+    <div class="my-16 space-y-16 mx-auto max-w-4xl px-6">
+      <header>
+        <ul class="mb-2 text-gray-600 flex items-center gap-2">
+          {
+            launchDate && (
+              <li>
+                <span>
+                  <time>
+                    Launched At {format(new Date(launchDate), "MMM dd, yyyy")}
+                  </time>
+                </span>
+              </li>
+            )
+          }
+          {
+            repoURL && (
+              <li>
+                <span class="mr-2">•</span>
+                <a href={repoURL}>Source Code</a>
+              </li>
+            )
+          }
+          {
+            visitURL && (
+              <li>
+                <span class="mr-2">•</span>
+                <a href={visitURL}>Visit</a>
+              </li>
+            )
+          }
+        </ul>
+        <h1 class="text-4xl font-black">
+          {title}
+        </h1>
+        <div class="aspect-video rounded-xl overflow-hidden mt-8 relative">
+          <img
+            src={coverImage}
+            alt={`${title} - Thumnail`}
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+      </header>
+      <article
+        class="prose dark:prose-invert mx-auto prose-pre:-mx-4 prose-pre:bg-gray-800 prose-pre:rounded-lg"
+      >
+        <slot />
+      </article>
+    </div>
+  </main>
+</BaseLayout>

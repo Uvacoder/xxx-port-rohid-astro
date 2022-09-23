@@ -1,0 +1,62 @@
+---
+import type { ProjectFrontmatter } from "@/types";
+
+export interface Props {
+  url?: string;
+  data: ProjectFrontmatter;
+}
+
+const {
+  url,
+  data: { coverImage, title, description, repoURL, visitURL },
+} = Astro.props;
+---
+
+<article>
+  <a
+    href={url}
+    class="relative aspect-[3/2] overflow-hidden rounded-xl mb-4 border border-gray-100 block group"
+  >
+    <img
+      src={coverImage}
+      alt={title}
+      class="absolute inset-0 object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
+    />
+    <div
+      class="group-hover:bg-black/50 absolute inset-0 transition-colors duration-300"
+    >
+    </div>
+  </a>
+  <div class="text-center">
+    <h3 class="text-xl font-bold mb-2">
+      <a href={url}>{title}</a>
+    </h3>
+    <p class="text-gray-600 line-clamp-3 mb-2">
+      {description}
+    </p>
+    <div class="flex items-center justify-center gap-4">
+      {
+        visitURL && (
+          <a
+            href={visitURL}
+            target="_blank"
+            class="text-gray-600 hover:text-gray-900"
+          >
+            Visit
+          </a>
+        )
+      }
+      {
+        repoURL && (
+          <a
+            href={repoURL}
+            target="_blank"
+            class="text-gray-600 hover:text-gray-900"
+          >
+            Source Code
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>

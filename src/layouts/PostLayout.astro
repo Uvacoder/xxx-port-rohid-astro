@@ -1,19 +1,14 @@
 ---
+import type { PostFrontmatter } from "@/types";
 import { format } from "date-fns";
 import BaseLayout from "./BaseLayout.astro";
 
 export interface Props {
-  content: {
-    title: string;
-    description: string;
-    date?: string;
-    readingTime?: string;
-    coverImage?: string;
-  };
+  content: PostFrontmatter;
 }
 
 const {
-  content: { title, description, date, readingTime, coverImage },
+  content: { title, description, pubDate, readingTime, coverImage },
 } = Astro.props;
 ---
 
@@ -21,11 +16,22 @@ const {
   <main>
     <div class="my-16 space-y-16 mx-auto max-w-4xl px-6">
       <header>
-        <p class="mb-2 text-gray-600">
-          {date && <time>{format(new Date(date), "MMM dd, yyyy")}</time>}
-          {" • "}
-          <span>{readingTime}</span>
-        </p>
+        <ul class="mb-2 text-gray-600 flex items-center gap-2">
+          {
+            pubDate && (
+              <li>
+                <time>
+                  <span>Published At</span>
+                  {format(new Date(pubDate), "MMM dd, yyyy")}
+                </time>
+              </li>
+            )
+          }
+
+          <li>
+            <span class="mr-2">•</span>{readingTime}
+          </li>
+        </ul>
         <h1 class="text-4xl font-black">
           {title}
         </h1>
@@ -37,7 +43,9 @@ const {
           />
         </div>
       </header>
-      <article class="prose dark:prose-invert mx-auto">
+      <article
+        class="prose dark:prose-invert mx-auto prose-pre:-mx-4 prose-pre:bg-gray-800 prose-pre:rounded-lg"
+      >
         <slot />
       </article>
     </div>

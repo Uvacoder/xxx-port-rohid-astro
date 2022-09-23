@@ -13,32 +13,20 @@ const posts = (await Astro.glob<PostFrontmatter>("./*.mdx"))
       new Date(b.frontmatter.pubDate)
     )
   );
-
-const featuredPosts = posts.filter((post) => post.frontmatter.featured);
 ---
 
 <BaseLayout title="Blogs - Rohid" description={SITE_DESCRIPTION}>
   <main>
     <div class="max-w-4xl mx-auto px-6 space-y-32 my-16">
-      {
-        featuredPosts.length > 0 && (
-          <section>
-            <div class="mb-8">
-              <h2 class="text-2xl font-bold">Featured Posts</h2>
-            </div>
-            <div class="grid md:grid-cols-2 gap-8">
-              {featuredPosts.map((post) => (
-                <PostCard url={post.url} data={post.frontmatter} />
-              ))}
-            </div>
-          </section>
-        )
-      }
+      <section class="text-center">
+        <h1 class="text-4xl font-bold mb-4">Posts</h1>
+        <p class="text-gray-600 text-lg">
+          I like to write about things that I'm interested in. I hope you will
+          find some of it interesting and helpfull too.
+        </p>
+      </section>
       <section>
-        <div class="mb-8">
-          <h2 class="text-2xl font-bold">All Posts</h2>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8">
+        <div class="grid sm:grid-cols-2 gap-8">
           {
             posts.map((post) => (
               <PostCard url={post.url} data={post.frontmatter} />

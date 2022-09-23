@@ -34,8 +34,8 @@ const featuredProjects = (
   .filter((item) => !item.frontmatter.draft && item.frontmatter.featured)
   .sort((a, b) =>
     compareDesc(
-      new Date(a.frontmatter.pubDate),
-      new Date(b.frontmatter.pubDate)
+      new Date(a.frontmatter.launchDate),
+      new Date(b.frontmatter.launchDate)
     )
   )
   .slice(0, 4);

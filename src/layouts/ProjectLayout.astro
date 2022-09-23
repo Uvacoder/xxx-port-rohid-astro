@@ -8,15 +8,32 @@ export interface Props {
 }
 
 const {
-  content: { title, description, visitURL, repoURL, launchDate, coverImage },
+  content: {
+    title,
+    description,
+    visitURL,
+    repoURL,
+    launchDate,
+    icon,
+    screenshots,
+  },
 } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} image={coverImage}>
+<BaseLayout title={title} description={description} image={icon}>
   <main>
     <div class="my-16 space-y-16 mx-auto max-w-4xl px-6">
-      <header>
-        <ul class="mb-2 text-gray-600 flex items-center gap-2">
+      <header class="flex items-center flex-col text-center">
+        <div
+          class="aspect-square w-32 rounded-3xl overflow-hidden relative mb-16"
+        >
+          <img
+            src={icon}
+            alt={`${title} - Thumnail`}
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+        <ul class="mb-4 text-gray-600 flex items-center gap-2">
           {
             launchDate && (
               <li>
@@ -32,7 +49,9 @@ const {
             repoURL && (
               <li>
                 <span class="mr-2">•</span>
-                <a href={repoURL}>Source Code</a>
+                <a target="_blank" href={repoURL}>
+                  Source Code
+                </a>
               </li>
             )
           }
@@ -40,7 +59,9 @@ const {
             visitURL && (
               <li>
                 <span class="mr-2">•</span>
-                <a href={visitURL}>Visit</a>
+                <a target="_blank" href={visitURL}>
+                  Visit
+                </a>
               </li>
             )
           }
@@ -48,14 +69,20 @@ const {
         <h1 class="text-4xl font-black">
           {title}
         </h1>
-        <div class="aspect-video rounded-xl overflow-hidden mt-8 relative">
-          <img
-            src={coverImage}
-            alt={`${title} - Thumnail`}
-            class="absolute inset-0 w-full h-full object-cover"
-          />
-        </div>
       </header>
+      {
+        screenshots && screenshots.length > 0 && (
+          <div class="w-full aspect-square sm:aspect-[3/2] md:aspect-video flex flex-row overflow-x-auto overflow-y-none gap-4 rounded-2xl">
+            {screenshots.map((screenshot, i) => (
+              <img
+                src={screenshot}
+                alt={`${title} screenshot - ${i}`}
+                class="m-0 rounded-2xl"
+              />
+            ))}
+          </div>
+        )
+      }
       <article
         class="prose dark:prose-invert mx-auto prose-pre:-mx-4 prose-pre:bg-gray-800 prose-pre:rounded-lg"
       >

@@ -72,12 +72,12 @@ const {
       </header>
       {
         screenshots && screenshots.length > 0 && (
-          <div class="w-full aspect-square sm:aspect-[3/2] md:aspect-video flex flex-row overflow-x-auto overflow-y-none gap-4 rounded-2xl">
+          <div class="w-full aspect-square sm:aspect-[3/2] md:aspect-video inline-flex overflow-x-auto overflow-y-none gap-4 rounded-2xl">
             {screenshots.map((screenshot, i) => (
               <img
                 src={screenshot}
                 alt={`${title} screenshot - ${i}`}
-                class="m-0 rounded-2xl"
+                class="m-0 rounded-2xl object-contain"
               />
             ))}
           </div>

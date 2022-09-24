@@ -5,7 +5,14 @@ import HeaderLink from "./HeaderLink.astro";
 
 <header>
   <div class="flex gap-8 py-2 px-6 mx-auto max-w-6xl">
-    <nav class="flex flex-1 items-center gap-4">
+    <button
+      id="menu-toggle-button"
+      class="w-8 h-8 flex items-center justify-center text-2xl hover:text-gray-600 md:hidden -mx-1"
+    >
+      <i id="menu-open-icon" class="fa-solid fa-bars"></i>
+      <i id="menu-close-icon" class="fa-solid fa-close hidden"></i>
+    </button>
+    <nav class="hidden md:flex flex-1 items-center gap-4">
       <HeaderLink href="/">Home</HeaderLink>
       <HeaderLink href="/posts">Posts</HeaderLink>
       <HeaderLink href="/projects">Projects</HeaderLink>
@@ -18,7 +25,7 @@ import HeaderLink from "./HeaderLink.astro";
             <li>
               <a
                 href={link}
-                class="text-xl hover:text-gray-600"
+                class="text-2xl hover:text-gray-600 w-8 h-8 flex items-center justify-center -mx-1"
                 target="_blank"
               >
                 {link.match(/^https:\/\/(www.)?github.com\/.*/) ? (
@@ -41,4 +48,55 @@ import HeaderLink from "./HeaderLink.astro";
       </ul>
     </nav>
   </div>
+  <div id="mobile-menu" class="hidden">
+    <nav class="flex flex-col px-2 py-2">
+      <a
+        class="px-4 h-10 flex items-center hover:bg-gray-100 rounded-md"
+        href="/">Home</a
+      >
+      <a
+        class="px-4 h-10 flex items-center hover:bg-gray-100 rounded-md"
+        href="/posts">Posts</a
+      >
+      <a
+        class="px-4 h-10 flex items-center hover:bg-gray-100 rounded-md"
+        href="/projects">Projects</a
+      >
+    </nav>
+  </div>
 </header>
+
+<script>
+  const mobileMenuButton = document.getElementById("menu-toggle-button");
+  const closeIcon = document.getElementById("menu-close-icon");
+  const openIcon = document.getElementById("menu-open-icon");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  let menuHidden = true;
+
+  const openMenu = () => {
+    menuHidden = false;
+    mobileMenu?.classList.toggle("hidden", false);
+    closeIcon?.classList.toggle("hidden", false);
+    openIcon?.classList.toggle("hidden", true);
+  };
+
+  const closeMenu = () => {
+    menuHidden = true;
+    mobileMenu?.classList.toggle("hidden", true);
+    closeIcon?.classList.toggle("hidden", true);
+    openIcon?.classList.toggle("hidden", false);
+  };
+
+  mobileMenuButton?.addEventListener("click", () => {
+    if (!menuHidden) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    closeMenu();
+  });
+</script>

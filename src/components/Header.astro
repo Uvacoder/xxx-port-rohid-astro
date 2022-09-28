@@ -16,6 +16,7 @@ import HeaderLink from "./HeaderLink.astro";
       <HeaderLink href="/">Home</HeaderLink>
       <HeaderLink href="/posts">Posts</HeaderLink>
       <HeaderLink href="/projects">Projects</HeaderLink>
+      <HeaderLink href="/hireme">Hire Me</HeaderLink>
     </nav>
 
     <nav class="flex flex-1 items-center justify-end gap-4">
@@ -26,18 +27,19 @@ import HeaderLink from "./HeaderLink.astro";
               <a
                 href={link}
                 class="text-2xl hover:text-gray-600 w-8 h-8 flex items-center justify-center -mx-1"
-                target="_blank"
               >
-                {link.match(/^https:\/\/(www.)?github.com\/.*/) ? (
+                {link === "github" ? (
                   <i class="fa-brands fa-github" />
-                ) : link.match(/^https:\/\/(www.)?instagram.com\/.*/) ? (
+                ) : link === "instagram" ? (
                   <i class="fa-brands fa-instagram" />
-                ) : link.match(/^https:\/\/(www.)?facebook.com\/.*/) ? (
+                ) : link === "facebook" ? (
                   <i class="fa-brands fa-facebook" />
-                ) : link.match(/^https:\/\/(www.)?linkedin.com\/.*/) ? (
+                ) : link === "linkedin" ? (
                   <i class="fa-brands fa-linkedin" />
-                ) : link.match(/^https:\/\/(www.)?twitter.com\/.*/) ? (
+                ) : link === "twitter" ? (
                   <i class="fa-brands fa-twitter" />
+                ) : link === "youtube" ? (
+                  <i class="fa-brands fa-youtube" />
                 ) : (
                   <i class="fa-solid fa-link" />
                 )}
@@ -48,6 +50,7 @@ import HeaderLink from "./HeaderLink.astro";
       </ul>
     </nav>
   </div>
+
   <div id="mobile-menu" class="hidden">
     <nav class="flex flex-col px-2 py-2">
       <a
@@ -67,6 +70,7 @@ import HeaderLink from "./HeaderLink.astro";
 </header>
 
 <script>
+  // Toggle nav menu for mobile device
   const mobileMenuButton = document.getElementById("menu-toggle-button");
   const closeIcon = document.getElementById("menu-close-icon");
   const openIcon = document.getElementById("menu-open-icon");
@@ -75,14 +79,20 @@ import HeaderLink from "./HeaderLink.astro";
   let menuHidden = true;
 
   const openMenu = () => {
+    if (!menuHidden) return;
+
     menuHidden = false;
+
     mobileMenu?.classList.toggle("hidden", false);
     closeIcon?.classList.toggle("hidden", false);
     openIcon?.classList.toggle("hidden", true);
   };
 
   const closeMenu = () => {
+    if (menuHidden) return;
+
     menuHidden = true;
+
     mobileMenu?.classList.toggle("hidden", true);
     closeIcon?.classList.toggle("hidden", true);
     openIcon?.classList.toggle("hidden", false);
@@ -96,6 +106,7 @@ import HeaderLink from "./HeaderLink.astro";
     }
   });
 
+  // Closing the menu when window starts to resize to avoid showing menu in the desktop view
   window.addEventListener("resize", () => {
     closeMenu();
   });

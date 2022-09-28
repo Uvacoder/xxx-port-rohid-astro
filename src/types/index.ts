@@ -19,4 +19,5 @@ export interface ProjectFrontmatter {
   featured?: boolean;
   draft?: boolean;
   screenshots?: string[];
+  coverPhoto: string;
 }

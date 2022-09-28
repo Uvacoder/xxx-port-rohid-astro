@@ -1,0 +1,33 @@
+---
+import { SORT_LINKS } from "@/config";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return [
+    ...SORT_LINKS.map((item) => ({
+      params: { sortLinkId: item.id },
+      props: item,
+    })),
+  ];
+}
+const { link, label } = Astro.props;
+---
+
+<BaseLayout>
+  <div class="flex items-center py-32 px-4 flex-col">
+    <p>
+      This page should automatically redirect you to <b>{label}</b>.
+    </p>
+    <p>
+      If it fails to redirect, then
+      <a id="sort-link" href={link} class="font-medium text-blue-500"
+        >Click Me</a
+      >
+    </p>
+  </div>
+</BaseLayout>
+
+<script>
+  const sortLink = document.getElementById("sort-link") as HTMLAnchorElement;
+  sortLink.click();
+</script>

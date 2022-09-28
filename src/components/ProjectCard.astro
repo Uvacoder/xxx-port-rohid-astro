@@ -8,29 +8,30 @@ export interface Props {
 
 const {
   url,
-  data: { icon, title, description, repoURL, visitURL },
+  data: { coverPhoto, title, description, repoURL, visitURL },
 } = Astro.props;
 ---
 
 <article class="flex flex-col items-center">
   <a
     href={url}
-    class="relative aspect-square overflow-hidden rounded-2xl mb-8 block group w-24"
+    class="relative aspect-[3/2] overflow-hidden rounded-2xl mb-4 block group w-full"
   >
     <img
-      src={icon}
+      src={coverPhoto}
       alt={title}
       class="absolute inset-0 object-cover w-full h-full"
     />
   </a>
-  <div class="text-center">
-    <h3 class="text-xl font-bold mb-4">
+  <div>
+    <h3 class="text-xl font-bold mb-2">
       <a href={url}>{title}</a>
     </h3>
-    <p class="text-gray-600 line-clamp-3 mb-4">
+    <p class="text-gray-600 line-clamp-2 mb-2">
       {description}
     </p>
-    <div class="flex items-center justify-center gap-8">
+    <div class="flex gap-4 flex-wrap">
+      <a href={url} class="text-gray-600 hover:text-gray-900"> Read More</a>
       {
         visitURL && (
           <a
@@ -39,6 +40,7 @@ const {
             class="text-gray-600 hover:text-gray-900"
           >
             Visit
+            <i class="fa-regular fa-arrow-up-right-from-square ml-1" />
           </a>
         )
       }
@@ -50,6 +52,7 @@ const {
             class="text-gray-600 hover:text-gray-900"
           >
             Source
+            <i class="fa-regular fa-arrow-up-right-from-square ml-1" />
           </a>
         )
       }

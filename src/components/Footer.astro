@@ -1,13 +1,14 @@
 ---
+import MillsNewsletter from "./MillsNewsletter.astro";
+
 const today = new Date();
 ---
 
 <footer>
-  &copy; {today.getFullYear()} Rohidul Islam. All rights reserved.
+  <div class="space-y-16 max-w-4xl mx-auto px-6">
+    <MillsNewsletter />
+    <p class="text-center text-gray-500 py-8">
+      &copy; {today.getFullYear()} Rohidul Islam. All rights reserved.
+    </p>
+  </div>
 </footer>
-<style>
-  footer {
-    padding: 25px;
-    text-align: center;
-  }
-</style>

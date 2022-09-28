@@ -1,0 +1,50 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Hire Me - Rohid">
+  <main>
+    <div class="max-w-2xl mx-auto px-6 space-y-16 my-16">
+      <section>
+        <div class="prose dark:prose-invert">
+          <h1>Hire Me</h1>
+          <p>Hey hi👋,</p>
+          <p>
+            I'm a full-stack developer &amp; designer. This is my pasion and I
+            love doing this. If you have any cool project idea that you want to
+            complete then you can contact me. I would love to hear about your
+            project idea. If I find your idea interested, I will contact you as
+            soon as possible. Fill up the form bellow, I can't wait to read
+            about your amazing idea.
+          </p>
+        </div>
+      </section>
+      <section>
+        <form class="grid grid-cols-2 gap-6">
+          <input
+            type="text"
+            name="name"
+            class="w-full bg-gray-100 rounded-md px-4 py-2 col-span-2 md:col-span-1"
+            placeholder="Your name"
+          />
+          <input
+            type="email"
+            name="email"
+            class="w-full bg-gray-100 rounded-md px-4 py-2 col-span-2 md:col-span-1"
+            placeholder="Your email"
+          />
+          <textarea
+            name="description"
+            class="w-full bg-gray-100 rounded-md px-4 py-2 col-span-2"
+            placeholder="Tell me about your project"
+            rows="8"></textarea>
+          <button
+            type="submit"
+            class="flex items-center justify-center px-4 col-span-2 bg-gray-900 text-white rounded-md py-3 hover:bg-gray-800"
+            >Submit</button
+          >
+        </form>
+      </section>
+    </div>
+  </main>
+</BaseLayout>

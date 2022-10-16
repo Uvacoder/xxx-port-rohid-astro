@@ -8,22 +8,22 @@ export const SORT_LINKS = [
   {
     id: "twitter",
     label: "Twitter",
-    link: "https://twitter.com/rohid2d",
+    link: "https://twitter.com/iam_rohid",
   },
   {
     id: "github",
     label: "GitHub",
-    link: "https://github.com/rohid2d",
+    link: "https://github.com/iam-rohid",
   },
   {
     id: "instagram",
     label: "Instagram",
-    link: "https://www.instagram.com/iam_rohid/",
+    link: "https://www.instagram.com/iam_rohid",
   },
   {
     id: "youtube",
     label: "YouTube",
-    link: "https://www.youtube.com/channel/UC3fyatEjSzRkzt_Wj1sg1hw",
+    link: "https://www.youtube.com/channel/UCzTeauACR_44y2_FygcjGbw",
   },
   {
     id: "linkedin",

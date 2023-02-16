@@ -8,12 +8,12 @@ export const SORT_LINKS = [
   {
     id: "twitter",
     label: "Twitter",
-    link: "https://twitter.com/iam_rohid",
+    link: "https://twitter.com/VaLandscapes",
   },
   {
     id: "github",
     label: "GitHub",
-    link: "https://github.com/iam-rohid",
+    link: "https://github.com/uvacoder",
   },
   {
     id: "instagram",
@@ -28,7 +28,7 @@ export const SORT_LINKS = [
   {
     id: "linkedin",
     label: "Linked In",
-    link: "https://www.linkedin.com/in/rohidul209/",
+    link: "https://www.linkedin.com/in/alecbcampbell/",
   },
   {
     id: "facebook",
